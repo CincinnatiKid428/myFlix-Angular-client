@@ -1,1 +1,60 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme((color: (theme-type: light,
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    ));
+}
+
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+//::::::Button Styling:::::::://
+.custom-button {
+  background-color: #fcda9b;
+  font-family: inherit;
+  height: 40px;
+  border-radius: 20px;
+  border-width: 0px;
+  color: black;
+  font-size: 14px;
+  padding: 10px 20px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.3s ease; //Smooth hover transition
+
+  &:hover {
+    background-color: #ffb52d; //Slight color change on hover
+  }
+
+  &:active {
+    box-shadow: none;
+    transform: translateY(3px);
+  }
+}
+
+//::::::UserRegistrationForm Styling:::::::://
+.snackbar-success .mat-mdc-snack-bar-surface {
+  background-color: #4caf50 !important;
+  color: #fff !important;
+}
+
+.snackbar-error .mat-mdc-snack-bar-surface {
+  background-color: #f44336 !important;
+  color: #fff !important;
+}

@@ -11,5 +11,5 @@ export function handleError(error: HttpErrorResponse): Observable<never> {
     console.error(`Backend returned code ${error.status}, body was: ${JSON.stringify(error.error)}`);
   }
 
-  return throwError(() => new Error('Something bad happened; please try again later.'));
+  return throwError(() => new Error(JSON.stringify(error.error)));
 }

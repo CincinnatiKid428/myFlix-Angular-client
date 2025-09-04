@@ -1,12 +1,79 @@
-import { Component } from '@angular/core';
+// File: src/app/app.component.ts
+
+import { Component, OnInit } from '@angular/core';
+import { NgIf } from "@angular/common";
 import { RouterOutlet } from '@angular/router';
+
+//Angular Material imports
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+
+//Application compponents imports
+import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
+import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [
+    NgIf,
+    RouterOutlet,
+    MatDialogModule,
+    MatButtonModule,
+    UserRegistrationFormComponent,
+    UserLoginFormComponent
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'myFlix-Angular-client';
+  localStorageUser: any | null = null; //user can be any(obj) or null, init to null
+  localStorageToken: string | null = null; //token can be string or null, init to null
+
+  //Flag to allow debug buttons for viewing/clearing localStorage on app-root component
+  ENABLE_DEBUG_LOCALSTORAGE = true;
+
+  constructor(public dialog: MatDialog) { }
+
+  ngOnInit(): void {
+    //Try to get user and token from localStorage
+    let userString: string | null = localStorage.getItem('user');
+    userString ? this.localStorageUser = JSON.parse(userString) : null;
+    this.localStorageToken = localStorage.getItem('token');
+  }
+
+  //Function opens the dialog when signup button is clicked  
+  openUserRegistrationDialog(): void {
+    console.log('Opening registration dialog...');
+    this.dialog.open(UserRegistrationFormComponent, {
+      // Assigning the dialog a width
+      width: '300px'
+    });
+  }
+
+  //Function opens user login dialog when login button is clicked
+  openUserLoginDialog(): void {
+    console.log('Opening login dialog...');
+    this.dialog.open(UserLoginFormComponent, {
+      width: '300px'
+    });
+  }
+
+  //Debugging functions for information (will be removed later) 
+
+  //Clears local storage values
+  clearLocalStorage(): void {
+    console.log('Clearing local storage...');
+    localStorage.clear();
+    this.localStorageUser = null;
+    this.localStorageToken = null;
+  }
+
+  //Gets local storage values and refreshes variables to Angular can see updates and display values after login
+  refreshLocalStorageValues(): void {
+    let userString = localStorage.getItem('user');
+    this.localStorageUser = userString ? JSON.parse(userString) : null;
+    this.localStorageToken = localStorage.getItem('token');
+  }
 }

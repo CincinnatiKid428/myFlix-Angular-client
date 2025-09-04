@@ -3,6 +3,7 @@ import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 
+//Handles errors encountered during API calls
 import { handleError } from './utils/error-handler';
 
 //Declaring the api url that will provide data for the client app
