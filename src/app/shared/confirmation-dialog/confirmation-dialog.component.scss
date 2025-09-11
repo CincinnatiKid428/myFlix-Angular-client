@@ -1,0 +1,56 @@
+.parent-button {
+  //background-color: #fcda9b;
+  color: black;
+  font-family: inherit;
+  height: 40px;
+  border-radius: 20px;
+  border-width: 0px;
+  font-size: 14px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.3s ease; //Smooth hover transition
+
+  &:hover {
+    background-color: #ffb52d; //Slight color change on hover
+  }
+
+  &:active {
+    box-shadow: none;
+    transform: translateY(3px);
+  }
+
+  &.small {
+    font-size: 12px;
+    padding: 6px 12px;
+    height: 30px;
+    border-radius: 15px;
+  }
+}
+
+.cancel-button {
+  @extend .parent-button;
+
+  background-color: #e99f97;
+  transition: color 0.3s ease;
+
+
+  &:hover {
+    background-color: #e74c3c;
+    color: white;
+  }
+}
+
+.confirm-button {
+  @extend .parent-button;
+
+  background-color: #5fa75f;
+  transition: color 0.3s ease;
+
+
+  &:hover {
+    background-color: #1e9e1e;
+    color: white;
+  }
+}

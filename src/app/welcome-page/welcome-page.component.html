@@ -1,0 +1,39 @@
+<!-- File src/app/welcome-page/welcome-page.component.html -->
+
+<div class="welcome-page-container">
+  <h1>
+    Welcome to Matinee!
+  </h1>
+  <div class="welcome-page-button-container">
+    <button class="custom-button" (click)="openUserRegistrationDialog()" style="margin-right: 10px;">
+      Sign Up
+    </button>
+    <button class="custom-button" (click)="openUserLoginDialog()">
+      Log In
+    </button>
+  </div>
+</div>
+<div class="welcome-image-container">
+  <img src="assets/images/matinee-film-reel-t.png" />
+</div>
+<!-- Debug localStorage buttons and display below: -->
+<div *ngIf="ENABLE_DEBUG_LOCALSTORAGE">
+  <br>
+  <button class="custom-button" (click)="refreshLocalStorageValues()" style="margin-left:10px;">
+    Check Local Storage
+  </button>
+  <button class="custom-button" (click)="clearLocalStorage()" style="margin-left: 10px;">
+    Clear Local Storage
+  </button>
+  <button class="custom-button" routerLink="/profile" style="margin-left: 10px;">
+    Account Profile
+  </button>
+</div>
+<div *ngIf="ENABLE_DEBUG_LOCALSTORAGE" style="margin-top:30px; margin-left:20px;">
+  <h2>Local Storage:</h2>
+  <h3>user:</h3>
+  <p *ngIf="localStorageUser">{{localStorageUser.Username}}</p>
+  <h3>token:</h3>
+  <p *ngIf="localStorageToken" style="word-wrap: break-word; overflow-wrap: break-word; white-space: normal;">
+    {{localStorageToken}}</p>
+</div>

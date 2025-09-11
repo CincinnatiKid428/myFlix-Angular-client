@@ -17,21 +17,23 @@ html {
 html,
 body {
   height: 100%;
+  margin: 0;
 }
 
 body {
-  margin: 0;
+  background-color: #fcda9b;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 //::::::Button Styling:::::::://
+
 .custom-button {
-  background-color: #fcda9b;
+  background-color: #f8a95f;
+  color: black;
   font-family: inherit;
   height: 40px;
   border-radius: 20px;
   border-width: 0px;
-  color: black;
   font-size: 14px;
   padding: 10px 20px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
@@ -39,12 +41,33 @@ body {
   transition: background-color 0.3s ease; //Smooth hover transition
 
   &:hover {
-    background-color: #ffb52d; //Slight color change on hover
+    background-color: #fa8a20; //Slight color change on hover
   }
 
   &:active {
     box-shadow: none;
     transform: translateY(3px);
+  }
+
+  &.small {
+    font-size: 12px;
+    padding: 6px 12px;
+    height: 30px;
+    border-radius: 15px;
+  }
+}
+
+.danger-button {
+  @extend .custom-button;
+
+  background-color: #e99f97; // red
+  color: black;
+  transition: color 0.3s ease; //Smooth hover transition
+
+
+  &:hover {
+    background-color: #e74c3c; // darker red on hover
+    color: white;
   }
 }
 

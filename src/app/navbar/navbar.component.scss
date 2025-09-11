@@ -1,0 +1,59 @@
+// Set to '1px' to enable borders, or '0px' to disable them globally
+$debug-border-width: 0px; // Change to 1px to turn on
+
+//::::::Navbar Styling:::::::://
+
+.sidenav-container {
+  width: 100%;
+  margin-bottom: 20px; //space between navbar & content
+  z-index: 1000;
+  border: solid $debug-border-width blue;
+}
+
+.test-border {
+  border: solid $debug-border-width green;
+}
+
+.mat-sidenav {
+  border: solid $debug-border-width red;
+  margin-top: 64px;
+  height: fit-content;
+}
+
+.sidenav-buttons-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1002;
+  padding: 16px;
+
+}
+
+.sidenav-buttons-format {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; // space between buttons
+}
+
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+}
+
+mat-sidenav-content {
+  padding-top: 64px; // offset for the fixed toolbar
+}
+
+::ng-deep .mat-mdc-icon-button:hover,
+::ng-deep .mat-mdc-icon-button:focus,
+::ng-deep .mat-mdc-icon-button:active {
+  background-color: #fcda9b; //Custom hover color for sandwich menu icon
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

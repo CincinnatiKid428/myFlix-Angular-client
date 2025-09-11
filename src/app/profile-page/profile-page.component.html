@@ -1,0 +1,70 @@
+<!-- src/app/profile-page/profile-page.component.html -->
+<mat-card class="mat-card">
+
+  <mat-card-header>
+    <h1 style="margin-bottom: 10px;">{{ user.Username }}'s Profile</h1>
+  </mat-card-header>
+
+  <mat-card-content style="width:90%;">
+    <hr>
+    <h3>Account Information:</h3>
+    <mat-grid-list cols="12" rowHeight="40px">
+
+      <mat-grid-tile colspan="4">
+        <div class="label-tile">Username:</div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="8">
+        <div class="value-tile">{{ user.Username }}</div>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="4">
+        <div class="label-tile">Email:</div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="8">
+        <div class="value-tile">{{ user.Email }}</div>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="4">
+        <div class="label-tile">Birthdate:</div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="8">
+        <div class="value-tile">{{ formatUserBday(user.Birthdate) }}</div>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+
+    <br>
+    <hr>
+    <h3>Update/Delete Account:</h3>
+    <p>(All fields must be completed)</p>
+
+    <form class="update-delete-form">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput [(ngModel)]="userData.Password" type="password" name="Password" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="userData.Email" type="email" name="Email" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Birthdate</mat-label>
+        <input matInput [(ngModel)]="userData.Birthdate" type="date" name="Birthdate">
+      </mat-form-field>
+
+    </form>
+
+  </mat-card-content>
+
+  <mat-card-actions style="margin-bottom:20px;">
+    <button class="custom-button" (click)="updateAccountInfo()" style="margin-right:10px;">
+      Update Account
+    </button>
+    <button class="danger-button" (click)="deleteAccount()">
+      Delete Account
+    </button>
+  </mat-card-actions>
+</mat-card>

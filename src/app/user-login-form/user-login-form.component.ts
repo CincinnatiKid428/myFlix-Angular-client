@@ -2,6 +2,7 @@
 
 import { Component, OnInit, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 //Angular Materials imports
 import { MatDialogModule } from '@angular/material/dialog';
@@ -13,7 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSnackBar } from '@angular/material/snack-bar'; //Used to display notifications back to the user
 
-//This import brings in the API calls we created in 6.2
+//API service import
 import { FetchApiDataService } from '../fetch-api-data.service';
 
 @Component({
@@ -39,7 +40,8 @@ export class UserLoginFormComponent implements OnInit {
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    public router: Router,
   ) {
 
   }
@@ -56,23 +58,30 @@ export class UserLoginFormComponent implements OnInit {
   //Function is responsible for sending the form inputs to the backend
   loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe((result) => {
-      // Logic for a successful user login here
-      console.log('loginUser():', result);
 
-      //Store user and token in localStorage
+      // Logic for a successful user login here
+      console.log('loginUser(): ✅', result);
+
+      //Store user, token & favorite movies in localStorage
       localStorage.setItem('user', JSON.stringify(result.user));
       localStorage.setItem('token', result.token);
+      localStorage.setItem('favoriteMovies', JSON.stringify(result.user.FavoriteMovies));
 
       this.dialogRef.close(); // This will close the modal on success!
       this.snackBar.open(`✅ ${result.user.Username} Login successful!`, 'OK', {
         duration: 2000,
-        //panelClass: ['snackbar-success']
+        //panelClass: ['snackbar-success'] //Try styling later if the component allows
       });
+
+      //Navigate to the movies view since user has logged in successfully
+      this.router.navigate(['/movies']);
+
     }, (result) => {
       //Logic for failed login here
-      this.snackBar.open(`❌ Login failed: ${result}`, 'OK', {
+      console.log('loginUser(): ❌', result);
+      this.snackBar.open(`❌ Login failed: Please try again`, 'OK', {
         duration: 8000,
-        //panelClass: ['snackbar-error']
+        //panelClass: ['snackbar-error'] //Try styling later if the component allows
       });
     });
   }

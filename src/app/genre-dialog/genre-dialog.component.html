@@ -1,0 +1,19 @@
+<!-- File: src/app/genre-dialog/genre-dialog.component.html -->
+<mat-card style="display:flex; align-items:center">
+  <mat-card-header>
+    <mat-card-title>{{genreName}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ng-container *ngIf="!isLoading; else loadingSpinner">
+      <p>{{ genreDesc }}</p>
+    </ng-container>
+    <ng-template #loadingSpinner>
+      <div style="display: flex; justify-content: center; padding: 20px;">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+      </div>
+    </ng-template>
+  </mat-card-content>
+  <mat-card-actions>
+    <button class="custom-button" (click)="closeDialog()">Close</button>
+  </mat-card-actions>
+</mat-card>

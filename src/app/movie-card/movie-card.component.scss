@@ -1,0 +1,101 @@
+// Set to '1px' to enable borders, or '0px' to disable them globally
+$debug-border-width: 2px; // Change to 1px to turn on
+
+
+// Container for cards
+:host ::ng-deep .card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
+mat-focus-indicator {
+  border: solid $debug-border-width red;
+}
+
+mat-button-toggle-checked {
+  border: solid $debug-border-width blue;
+}
+
+mat-button-toggle-button ::ng-deep {
+  border: solid $debug-border-width green;
+}
+
+::ng-deep mat-button-toggle.mat-button-toggle-checked {
+  background-color: white !important; // Green background
+  color: black !important; // White text/icon
+}
+
+// Individual card styling
+.movie-card {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-shrink: 1;
+  //background-color: #fff;
+}
+
+// Card header
+.card-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+// Prevent title wrap and add ellipsis
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  padding: 0 10px;
+}
+
+// Subtitle
+.card-subtitle {
+  font-size: 14px;
+  padding: 0 10px;
+}
+
+// Image styling
+.movie-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin: 10px 0;
+}
+
+// Button container
+.card-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px;
+}
+
+.test-border {
+  border: solid $debug-border-width red;
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 600px) {
+  .movie-card {
+    width: 90%;
+  }
+
+  .card-title {
+    font-size: 16px;
+  }
+
+  .card-subtitle {
+    font-size: 13px;
+  }
+}

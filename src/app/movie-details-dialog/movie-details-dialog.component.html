@@ -1,0 +1,44 @@
+<!-- File: src/app/movie-details-dialog/movie-details-dialog.component.html -->
+<div class="card-container scrollable-container">
+  <mat-card>
+    <mat-card-header *ngIf="!isLoading" style="display:flex; justify-content:center;">
+      <mat-card-title><strong>{{movieData.Title}}</strong></mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <hr>
+      <div *ngIf="!isLoading">
+        <mat-grid-list cols="2" rowHeight="55px">
+
+          <mat-grid-tile><strong>Released:</strong></mat-grid-tile>
+          <mat-grid-tile>{{movieData.ReleaseYear}}</mat-grid-tile>
+
+          <mat-grid-tile><strong>Director:</strong></mat-grid-tile>
+          <mat-grid-tile>{{movieData.Director}}</mat-grid-tile>
+
+          <mat-grid-tile><strong>Genre:</strong></mat-grid-tile>
+          <mat-grid-tile>{{movieData.Genre}}</mat-grid-tile>
+
+          <mat-grid-tile><strong>Rating:</strong></mat-grid-tile>
+          <mat-grid-tile>{{movieData.Rating}}</mat-grid-tile>
+
+          <mat-grid-tile><strong>Actors:</strong></mat-grid-tile>
+          <mat-grid-tile>{{movieData.Actors}}</mat-grid-tile>
+
+        </mat-grid-list>
+        <hr>
+        <img [src]="movieData.ImageURL" style="float:inline-start; width:30%; margin-right:10px;" />
+        <p><strong>Description:</strong></p>
+        <p>{{movieData.Description}}</p>
+      </div>
+
+      <div *ngIf="isLoading" style="display: flex; justify-content: center; padding: 20px;">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions style="display:flex; justify-content:center;">
+      <button class="custom-button" (click)="closeDialog()">Close</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

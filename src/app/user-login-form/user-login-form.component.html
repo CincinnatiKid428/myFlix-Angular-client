@@ -6,8 +6,8 @@
   </mat-card-header>
 
   <mat-card-content>
-    <form style="display:flex; flex-direction: column; justify-content: center;">
 
+    <form style="display:flex; flex-direction: column; justify-content: center;">
       <mat-form-field appearance="fill">
         <mat-label>Username</mat-label>
         <input matInput [(ngModel)]="userData.Username" type="text" name="Username" required>
@@ -17,16 +17,19 @@
         <mat-label>Password</mat-label>
         <input matInput [(ngModel)]="userData.Password" type="password" name="Password" required>
       </mat-form-field>
-
     </form>
+
   </mat-card-content>
 
   <mat-card-actions>
+
     <button class="custom-button" (click)="loginUser()" style="margin-right:10px;">
       Log In
     </button>
+
     <button class="custom-button" (click)="closeDialog()">
       Cancel
     </button>
+
   </mat-card-actions>
 </mat-card>

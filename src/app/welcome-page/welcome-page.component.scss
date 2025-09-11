@@ -1,0 +1,37 @@
+// Set to '1px' to enable borders, or '0px' to disable them globally
+$debug-border-width: 0px; // Change to 1px to turn on
+
+.welcome-page-container {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center; //horiz align center content
+  justify-content: center; //vert align center content
+
+  background-color: white;
+  border-radius: 15px;
+
+  width: 60%;
+  max-width: 500px;
+  min-height: min-content;
+  height: 25%;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  padding: 15px;
+
+  border: solid $debug-border-width blue;
+}
+
+.welcome-page-button-container {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  border: solid $debug-border-width red;
+}
+
+.welcome-image-container {
+  display: flex;
+  justify-content: center;
+}

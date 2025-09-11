@@ -1,0 +1,48 @@
+<mat-sidenav-container class="sidenav-container">
+
+  <mat-sidenav #drawer mode="over" [opened]="false" class="sidenav-buttons-container">
+
+    <ng-container *ngIf="isUserLoggedIn(); else loggedOutLinks">
+
+      <div class="sidenav-buttons-format">
+        <button class="custom-button" routerLink="/movies" (click)="drawer.close()"
+          style="margin-top: 0px;">Movies</button>
+        <button class="custom-button" routerLink="/profile" (click)="drawer.close()">My Profile</button>
+        <button class="custom-button" (click)="logout(); drawer.close()" style="margin-bottom: 20px;">Logout</button>
+      </div>
+
+    </ng-container>
+
+    <ng-template #loggedOutLinks>
+      <div class="sidenav-buttons-format">
+        <button class="custom-button" routerLink="/welcome" (click)="drawer.close()">Login/Signup</button>
+      </div>
+    </ng-template>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button mat-icon-button style="margin-right: 15px;" (click)="drawer.toggle()" *ngIf="isMobile">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <img src="assets/images/navbar-logo.png" alt="Logo" />
+
+      <span class="spacer"></span>
+
+      <!--Full sized navbar-->
+      <ng-container *ngIf="!(isMobile)">
+        <ng-container *ngIf="isUserLoggedIn(); else mobileLoggedOut">
+          <button class="custom-button" routerLink="/movies" style="margin-right: 10px;">Movies</button>
+          <button class="custom-button" routerLink="/profile" style="margin-right:10px;">Profile</button>
+          <button class="custom-button" (click)="logout()">Logout</button>
+        </ng-container>
+        <ng-template #mobileLoggedOut>
+          <button class="custom-button" routerLink="/welcome">Login/Signup</button>
+        </ng-template>
+      </ng-container>
+    </mat-toolbar>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

@@ -1,3 +1,4 @@
+//File: src/app/fetch-api-data.service.ts
 import { Injectable } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
@@ -26,7 +27,8 @@ export class FetchApiDataService {
   private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
     return new HttpHeaders({
-      Authorization: 'Bearer ' + token
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
     });
   }
 
@@ -69,7 +71,7 @@ export class FetchApiDataService {
   public userAddFavMovie(movieID: string): Observable<any> {
     DEBUG_LOG && console.log(`*FetchApiDataService|userAddFavMovie() :`, movieID);
 
-    return this.http.post(`${apiUrl}/movies/favorites/${movieID}`, {
+    return this.http.post(`${apiUrl}/movies/favorites/${movieID}`, null, {
       headers: this.getAuthHeaders()
     }).pipe(
       catchError(handleError)
@@ -92,7 +94,8 @@ export class FetchApiDataService {
     DEBUG_LOG && console.log(`*FetchApiDataService|userDeregistration()`);
 
     return this.http.delete(`${apiUrl}/users/`, {
-      headers: this.getAuthHeaders()
+      headers: this.getAuthHeaders(),
+      responseType: 'text'
     }).pipe(
       catchError(handleError)
     );
