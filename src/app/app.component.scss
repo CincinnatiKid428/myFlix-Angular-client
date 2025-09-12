@@ -1,0 +1,61 @@
+//File: src/app/app.component.scss
+
+.sidenav-container {
+  width: 100%;
+  height: 100vh;
+}
+
+.mat-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+}
+
+.mat-sidenav-content {
+  padding-top: 64px; // offset for the toolbar
+  height: calc(100vh - 64px);
+  overflow: auto;
+}
+
+.mat-sidenav {
+  margin-top: 64px;
+  height: calc(100vh - 64px);
+  background-color: #fff;
+  z-index: 1002;
+  overflow: auto;
+}
+
+.custom-nav-button {
+  background-color: #f8a95f;
+  color: black;
+  font-family: inherit;
+  height: 40px;
+  width: 100%;
+  margin-bottom: 3px;
+  border-width: 0px;
+  font-size: 14px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; //Smooth hover transition
+
+  &:hover {
+    background-color: #fa8a20; //Slight color change on hover
+  }
+
+  &:active {
+    box-shadow: none;
+    background-color: white;
+    border: solid 2px #fa8a20;
+
+  }
+}
+
+.brand-logo {
+  margin-left: 10px;
+}
+
+.app-content {
+  padding: 16px;
+}

@@ -17,6 +17,9 @@ import { MatSnackBar } from '@angular/material/snack-bar'; //Used to display not
 //API service import
 import { FetchApiDataService } from '../fetch-api-data.service';
 
+//Auth check service import
+import { AuthCheckService } from '../auth-check.service';
+
 @Component({
   selector: 'app-user-login-form',
   standalone: true,
@@ -42,6 +45,7 @@ export class UserLoginFormComponent implements OnInit {
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
     public snackBar: MatSnackBar,
     public router: Router,
+    private authCheckService: AuthCheckService
   ) {
 
   }
@@ -66,6 +70,8 @@ export class UserLoginFormComponent implements OnInit {
       localStorage.setItem('user', JSON.stringify(result.user));
       localStorage.setItem('token', result.token);
       localStorage.setItem('favoriteMovies', JSON.stringify(result.user.FavoriteMovies));
+
+      this.authCheckService.login(); //Notify app root user logged in
 
       this.dialogRef.close(); // This will close the modal on success!
       this.snackBar.open(`✅ ${result.user.Username} Login successful!`, 'OK', {

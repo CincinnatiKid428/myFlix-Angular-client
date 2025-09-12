@@ -1,10 +1,11 @@
 // Set to '1px' to enable borders, or '0px' to disable them globally
-$debug-border-width: 0px; // Change to 1px to turn on
+$debug-border-width: 1px; // Change to 1px to turn on
 
 //::::::Navbar Styling:::::::://
 
 .sidenav-container {
   width: 100%;
+  height: 100vh; // (Added)
   margin-bottom: 20px; //space between navbar & content
   z-index: 1000;
   border: solid $debug-border-width blue;
@@ -16,15 +17,21 @@ $debug-border-width: 0px; // Change to 1px to turn on
 
 .mat-sidenav {
   border: solid $debug-border-width red;
+  background-color: #ffffff; // (Added) or dark if you want contrast
   margin-top: 64px;
-  height: fit-content;
+  //height: fit-content; // (Removed)
+  height: calc(100vh - 64px); // (Added) 64px offset for toolbar - Option 1
+  //height: 100vh; // (Added) Option 2
+  z-index: 1002; // (Added)higher than toolbar 
+  overflow: auto; // (Added)
 }
 
 .sidenav-buttons-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  border: dashed $debug-border-width purple;
+  //position: fixed; (Removed)
+  //top: 0; (Removed)
+  //left: 0; (Removed)
+  //right: 0; (Removed)
   z-index: 1002;
   padding: 16px;
 
@@ -36,7 +43,7 @@ $debug-border-width: 0px; // Change to 1px to turn on
   gap: 10px; // space between buttons
 }
 
-mat-toolbar {
+.mat-toolbar {
   position: fixed;
   top: 0;
   left: 0;
@@ -44,8 +51,10 @@ mat-toolbar {
   z-index: 1001;
 }
 
-mat-sidenav-content {
+.mat-sidenav-content {
   padding-top: 64px; // offset for the fixed toolbar
+  height: calc(100vh - 64px); // (Added) makes content scrollable below toolbar
+  overflow: auto; // (Added)
 }
 
 ::ng-deep .mat-mdc-icon-button:hover,

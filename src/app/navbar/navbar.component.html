@@ -1,6 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
 
-  <mat-sidenav #drawer mode="over" [opened]="false" class="sidenav-buttons-container">
+  <mat-sidenav #drawer mode="over" [opened]="false" (backdropClick)="drawer.close()" class="sidenav-buttons-container">
 
     <ng-container *ngIf="isUserLoggedIn(); else loggedOutLinks">
 
@@ -42,6 +42,8 @@
           <button class="custom-button" routerLink="/welcome">Login/Signup</button>
         </ng-template>
       </ng-container>
+
+
     </mat-toolbar>
   </mat-sidenav-content>
 
