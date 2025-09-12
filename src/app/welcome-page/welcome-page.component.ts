@@ -31,11 +31,19 @@ export class WelcomePageComponent implements OnInit {
 
   constructor(public dialog: MatDialog) { }
 
+
+
+  private isBrowser(): boolean {
+    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
+  }
+
   ngOnInit(): void {
-    //Try to get user and token from localStorage
-    let userString: string | null = localStorage.getItem('user');
-    userString ? this.localStorageUser = JSON.parse(userString) : null;
-    this.localStorageToken = localStorage.getItem('token');
+    if (this.isBrowser()) {
+      //Try to get user and token from localStorage
+      let userString: string | null = localStorage.getItem('user');
+      userString ? this.localStorageUser = JSON.parse(userString) : null;
+      this.localStorageToken = localStorage.getItem('token');
+    }
   }
 
   //Function opens the dialog when signup button is clicked  
