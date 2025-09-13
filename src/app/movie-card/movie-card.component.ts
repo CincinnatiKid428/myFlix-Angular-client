@@ -80,7 +80,7 @@ export class MovieCardComponent implements OnInit {
     console.log(`Getting genre description...`)
     this.dialog.open(GenreDialogComponent, {
       data: genreName,
-      width: '50%'
+      width: '80%'
     });
   }
 

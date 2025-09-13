@@ -12,3 +12,19 @@
   overflow-y: auto; // Enables vertical scrolling when needed
   //padding: 16px; // Optional, for spacing
 }
+
+mat-card {
+  display: flex;
+  align-items: center
+}
+
+mat-card-subtitle {
+  width: 100%;
+  text-align: center;
+}
+
+.spinner-div {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}

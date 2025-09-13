@@ -1,0 +1,25 @@
+// Container for cards
+:host ::ng-deep .card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  //padding: 10px;
+}
+
+.scrollable-container {
+  max-height: 90vh; // Adjust as needed (90% of viewport height)
+  overflow-y: auto; // Enables vertical scrolling when needed
+  //padding: 16px; // Optional, for spacing
+}
+
+mat-card {
+  display: flex;
+  align-items: center
+}
+
+.spinner-div {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
