@@ -36,3 +36,26 @@ $debug-border-width: 0px; // Change to 1px to turn on
   margin-right: auto;
   border: solid $debug-border-width green; //debug border
 }
+
+
+/* Responsive adjustments for small screens */
+@media (max-width: 600px) {
+  .mat-card {
+    margin-right: 0%;
+    margin-left: 0%;
+  }
+}
+
+@media (max-width: 400px) {
+  .mat-card {
+    margin-right: 0%;
+    margin-left: 0%;
+    font-size: 14px;
+  }
+}
+
+@media (max-height: 400px) {
+  .welcome-page-container {
+    height: 35%;
+  }
+}

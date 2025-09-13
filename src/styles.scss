@@ -30,7 +30,7 @@ body {
 //::::::Button Styling:::::::://
 
 .custom-button {
-  background-color: #f8a95f;
+  background-color: #ffc086;
   color: black;
   font-family: inherit;
   height: 40px;
@@ -44,6 +44,7 @@ body {
 
   &:hover {
     background-color: #fa8a20; //Slight color change on hover
+    color: white;
   }
 
   &:active {
@@ -74,12 +75,22 @@ body {
 }
 
 //::::::UserRegistrationForm Styling:::::::://
-.snackbar-success .mat-mdc-snack-bar-surface {
+::ng-deep .snackbar-success .mat-mdc-snack-bar-surface {
   background-color: #4caf50 !important;
   color: #fff !important;
 }
 
-.snackbar-error .mat-mdc-snack-bar-surface {
+::ng-deep .snackbar-error .mat-mdc-snack-bar-surface {
   background-color: #f44336 !important;
   color: #fff !important;
+}
+
+::ng-deep .custom-dialog-container {
+  max-height: 90vh; // prevent cutoff on small landscape screens
+  overflow: auto; // enable scrolling if needed
+  padding: 1rem;
+
+  @media (max-width: 600px) and (orientation: landscape) {
+    width: 90vw !important;
+  }
 }

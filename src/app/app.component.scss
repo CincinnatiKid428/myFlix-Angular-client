@@ -56,6 +56,12 @@
   margin-left: 10px;
 }
 
+::ng-deep .mat-mdc-icon-button:hover,
+::ng-deep .mat-mdc-icon-button:focus,
+::ng-deep .mat-mdc-icon-button:active {
+  background-color: #fcda9b; //Custom hover color for sandwich menu icon
+}
+
 .app-content {
   padding: 16px;
 }

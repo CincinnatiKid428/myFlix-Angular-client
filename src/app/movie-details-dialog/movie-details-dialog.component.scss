@@ -12,3 +12,25 @@
   overflow-y: auto; // Enables vertical scrolling when needed
   //padding: 16px; // Optional, for spacing
 }
+
+::ng-deep .actor-value-tile {
+  height: fit-content;
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 600px) {
+  .card-container {
+    margin-right: 0%;
+    margin-left: 0%;
+  }
+}
+
+@media (max-width: 400px) {
+  .card-container {
+    margin-right: 0%;
+    margin-left: 0%;
+    font-size: 14px;
+  }
+}
+
+@media (max-height: 400px) {}

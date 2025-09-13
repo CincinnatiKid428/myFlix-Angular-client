@@ -8,8 +8,8 @@ $debug-border-width: 0px; // Change to 1px to turn on
   align-items: center; //horiz align center content
   justify-content: center; //vert align center content
 
-  background-color: white;
-  border-radius: 15px;
+  background-color: transparent;
+  //border-radius: 15px;
 
   width: 60%;
   max-width: 500px;
@@ -34,4 +34,32 @@ $debug-border-width: 0px; // Change to 1px to turn on
 .welcome-image-container {
   display: flex;
   justify-content: center;
+}
+
+.welcome-heading {
+  font-size: x-large;
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 600px) {
+  .welcome-heading {
+    font-size: large;
+  }
+}
+
+@media (max-width: 400px) {
+  .welcome-page-container {
+    width: 80%;
+    max-width: none;
+  }
+
+  .welcome-heading {
+    font-size: medium;
+  }
+}
+
+@media (max-height: 400px) {
+  .welcome-page-container {
+    height: 35%;
+  }
 }

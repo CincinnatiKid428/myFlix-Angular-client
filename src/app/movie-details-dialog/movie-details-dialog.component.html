@@ -8,22 +8,22 @@
     <mat-card-content>
       <hr>
       <div *ngIf="!isLoading">
-        <mat-grid-list cols="2" rowHeight="55px">
+        <mat-grid-list cols="12" rowHeight="55px">
 
-          <mat-grid-tile><strong>Released:</strong></mat-grid-tile>
-          <mat-grid-tile>{{movieData.ReleaseYear}}</mat-grid-tile>
+          <mat-grid-tile colspan="4"><strong>Released:</strong></mat-grid-tile>
+          <mat-grid-tile colspan="8">{{movieData.ReleaseYear}}</mat-grid-tile>
 
-          <mat-grid-tile><strong>Director:</strong></mat-grid-tile>
-          <mat-grid-tile>{{movieData.Director}}</mat-grid-tile>
+          <mat-grid-tile colspan="4"><strong>Director:</strong></mat-grid-tile>
+          <mat-grid-tile colspan="8">{{movieData.Director}}</mat-grid-tile>
 
-          <mat-grid-tile><strong>Genre:</strong></mat-grid-tile>
-          <mat-grid-tile>{{movieData.Genre}}</mat-grid-tile>
+          <mat-grid-tile colspan="4"><strong>Genre:</strong></mat-grid-tile>
+          <mat-grid-tile colspan="8">{{movieData.Genre}}</mat-grid-tile>
 
-          <mat-grid-tile><strong>Rating:</strong></mat-grid-tile>
-          <mat-grid-tile>{{movieData.Rating}}</mat-grid-tile>
+          <mat-grid-tile colspan="4"><strong>Rating:</strong></mat-grid-tile>
+          <mat-grid-tile colspan="8">{{movieData.Rating}}</mat-grid-tile>
 
-          <mat-grid-tile><strong>Actors:</strong></mat-grid-tile>
-          <mat-grid-tile>{{movieData.Actors}}</mat-grid-tile>
+          <mat-grid-tile colspan="4"><strong>Actors:</strong></mat-grid-tile>
+          <mat-grid-tile colspan="8">{{movieData.Actors}}</mat-grid-tile>
 
         </mat-grid-list>
         <hr>

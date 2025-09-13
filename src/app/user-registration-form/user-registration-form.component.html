@@ -1,42 +1,44 @@
 <!-- src/app/user-registration-form/user-registration-form.component.html -->
+<div class="registration-container">
+  <mat-card>
+    <!--
+    <mat-card-header>
+      <mat-card-title>Sign Up!</mat-card-title>
+    </mat-card-header>
+-->
+    <mat-card-content style="overflow-y:auto">
+      <form class="reg-form">
 
-<mat-card style="align-items: center;">
-  <mat-card-header>
-    <mat-card-title style="margin-bottom: 10px;">Sign Up!</mat-card-title>
-  </mat-card-header>
+        <mat-form-field appearance="fill">
+          <mat-label>Username</mat-label>
+          <input matInput [(ngModel)]="userData.Username" type="text" name="Username" required>
+        </mat-form-field>
 
-  <mat-card-content>
-    <form style="display:flex; flex-direction: column; justify-content: center;">
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput [(ngModel)]="userData.Password" type="password" name="Password" required>
+        </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Username</mat-label>
-        <input matInput [(ngModel)]="userData.Username" type="text" name="Username" required>
-      </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput [(ngModel)]="userData.Email" type="email" name="Email" required>
+        </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Password</mat-label>
-        <input matInput [(ngModel)]="userData.Password" type="password" name="Password" required>
-      </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Birthdate</mat-label>
+          <input matInput [(ngModel)]="userData.Birthdate" type="date" name="Birthdate">
+        </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Email</mat-label>
-        <input matInput [(ngModel)]="userData.Email" type="email" name="Email" required>
-      </mat-form-field>
+      </form>
+    </mat-card-content>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Birthdate</mat-label>
-        <input matInput [(ngModel)]="userData.Birthdate" type="date" name="Birthdate">
-      </mat-form-field>
-
-    </form>
-  </mat-card-content>
-
-  <mat-card-actions>
-    <button class="custom-button" (click)="registerUser()" style="margin-right:10px;">
-      Sign Up
-    </button>
-    <button class="custom-button" (click)="closeDialog()">
-      Cancel
-    </button>
-  </mat-card-actions>
-</mat-card>
+    <mat-card-actions>
+      <button class="custom-button" (click)="registerUser()" style="margin-right:10px;">
+        Sign Up
+      </button>
+      <button class="custom-button" (click)="closeDialog()">
+        Cancel
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

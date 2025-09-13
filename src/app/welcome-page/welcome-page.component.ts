@@ -51,7 +51,7 @@ export class WelcomePageComponent implements OnInit {
     console.log('Opening registration dialog...');
     this.dialog.open(UserRegistrationFormComponent, {
       // Assigning the dialog a width
-      width: '300px'
+      width: '50%',
     });
   }
 
@@ -59,7 +59,7 @@ export class WelcomePageComponent implements OnInit {
   openUserLoginDialog(): void {
     console.log('Opening login dialog...');
     this.dialog.open(UserLoginFormComponent, {
-      width: '300px'
+      width: '50%'
     });
   }
 
