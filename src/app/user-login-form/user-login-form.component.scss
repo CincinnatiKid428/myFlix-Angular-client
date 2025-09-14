@@ -1,0 +1,18 @@
+$debug-border: 0px; //used to show or hide borders in UI components
+
+mat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+mat-card-content {
+  border: solid $debug-border red;
+}
+
+.wider-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid $debug-border blue;
+}

@@ -1,6 +1,6 @@
 <!-- src/app/user-login-form/user-login-form.component.html -->
 
-<mat-card style="align-items: center;">
+<mat-card>
   <!--
   <mat-card-header>
     <mat-card-title style="margin-bottom: 10px;">Log In!</mat-card-title>
@@ -8,10 +8,10 @@
   -->
   <mat-card-content>
 
-    <form style="display:flex; flex-direction: column; justify-content: center;">
+    <form class="wider-form">
       <mat-form-field appearance="fill">
         <mat-label>Username</mat-label>
-        <input matInput [(ngModel)]="userData.Username" type="text" name="Username" required>
+        <input matInput class="wide-form-field" [(ngModel)]="userData.Username" type="text" name="Username" required>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
