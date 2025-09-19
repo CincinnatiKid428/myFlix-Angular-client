@@ -20,8 +20,8 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 //Auth check service import
 import { AuthCheckService } from '../auth-check.service';
 
-//Logging flag to enable/disable logging in component
-const DEBUG_LOG = false;
+import { AppSettings } from '../app-settings';
+const DEBUG_LOG = AppSettings.DEBUG_LOG; // controls logging
 
 @Component({
   selector: 'app-user-login-form',

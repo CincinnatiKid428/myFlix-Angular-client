@@ -4,7 +4,7 @@
   <span class="welcome-heading">
     Welcome to Matinee!
   </span>
-  <div class="welcome-page-button-container">
+  <div *ngIf="!hideButtons" class="welcome-page-button-container">
     <button class="custom-button" (click)="openUserRegistrationDialog()" style="margin-right: 10px;">
       Sign Up
     </button>

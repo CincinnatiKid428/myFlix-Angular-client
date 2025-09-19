@@ -13,8 +13,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 //API service import
 import { FetchApiDataService } from '../fetch-api-data.service';
 
-//Logging flag to enable/disable logging in component
-const DEBUG_LOG = false;
+import { AppSettings } from '../app-settings';
+const DEBUG_LOG = AppSettings.DEBUG_LOG; // controls logging
 
 @Component({
   selector: 'app-movie-details-dialog',

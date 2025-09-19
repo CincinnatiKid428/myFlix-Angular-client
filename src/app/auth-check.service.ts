@@ -3,6 +3,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+import { AppSettings } from './app-settings';
+const DEBUG_LOG = AppSettings.DEBUG_LOG; // controls logging
+
 @Injectable({
   providedIn: 'root'
 })
@@ -40,7 +43,7 @@ export class AuthCheckService {
     if (this.isBrowser()) {
       const hasAuth = this.hasAuth();
       this.loggedIn.next(hasAuth);
-      console.log(`🔐 AuthCheckService.init(): ${hasAuth ? '✅ Auth found' : '❌ Not authenticated'}`);
+      DEBUG_LOG && console.log(`🔐 AuthCheckService.init(): ${hasAuth ? '✅ Auth found' : '❌ Not authenticated'}`);
     }
   }
 
@@ -69,7 +72,7 @@ export class AuthCheckService {
    */
   login(): void {
     this.loggedIn.next(true);
-    console.log(`**AuthCheckService: ✅ Logged in!`);
+    DEBUG_LOG && console.log(`**AuthCheckService: ✅ Logged in!`);
   }
 
   /**
@@ -81,6 +84,6 @@ export class AuthCheckService {
       localStorage.clear();
     }
     this.loggedIn.next(false);
-    console.log(`**AuthCheckService: ❌ Logged out!`);
+    DEBUG_LOG && console.log(`**AuthCheckService: ❌ Logged out!`);
   }
 }

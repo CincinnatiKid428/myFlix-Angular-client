@@ -22,8 +22,8 @@ import { AuthCheckService } from '../auth-check.service';
 //Custom confirmation dialog component
 import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
 
-//Logging flag to enable/disable logging in component
-const DEBUG_LOG = false;
+import { AppSettings } from '../app-settings';
+const DEBUG_LOG = AppSettings.DEBUG_LOG; // controls logging
 
 @Component({
   selector: 'app-profile-page',

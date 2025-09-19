@@ -7,11 +7,11 @@ import { Observable, throwError } from 'rxjs';
 //Handles HTTP errors encountered during API calls
 import { handleError } from './utils/error-handler';
 
+import { AppSettings } from './app-settings';
+const DEBUG_LOG = AppSettings.DEBUG_LOG; // controls logging
+
 //API URL that will provide data for the client app
 const apiUrl = 'https://fast-taiga-09096-54ce00eca848.herokuapp.com';
-
-//Debug logging constant used to turn logging in user API endpoints on/off
-const DEBUG_LOG = true;
 
 @Injectable({
   providedIn: 'root'

@@ -12,8 +12,8 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 //API service import
 import { FetchApiDataService } from '../fetch-api-data.service';
 
-//Logging flag to enable/disable logging in component
-const DEBUG_LOG = false;
+import { AppSettings } from '../app-settings';
+const DEBUG_LOG = AppSettings.DEBUG_LOG; // controls logging
 
 @Component({
   selector: 'app-director-dialog',
@@ -71,7 +71,7 @@ export class DirectorDialogComponent implements OnInit {
     this.fetchApiData.getDirectorByName(this.directorName).subscribe((resp) => {
       this.directorData = resp;
       this.isLoading = false;
-      console.log(`* * getDirector(): ${this.directorData.Name}:`, this.directorData);
+      DEBUG_LOG && console.log(`* * getDirector(): ${this.directorData.Name}:`, this.directorData);
     });
   }
 

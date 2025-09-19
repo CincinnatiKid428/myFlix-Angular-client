@@ -19,8 +19,8 @@ import { DirectorDialogComponent } from '../director-dialog/director-dialog.comp
 import { GenreDialogComponent } from '../genre-dialog/genre-dialog.component';
 import { MovieDetailsDialogComponent } from '../movie-details-dialog/movie-details-dialog.component';
 
-//Logging flag to enable/disable logging in component
-const DEBUG_LOG = false;
+import { AppSettings } from '../app-settings';
+const DEBUG_LOG = AppSettings.DEBUG_LOG; // controls logging
 
 @Component({
   selector: 'app-movie-card',

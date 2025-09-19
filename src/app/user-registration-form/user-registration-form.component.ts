@@ -16,8 +16,8 @@ import { MatSnackBar } from '@angular/material/snack-bar'; //Used to display not
 //This import brings in the API calls
 import { FetchApiDataService } from '../fetch-api-data.service';
 
-//Logging flag to enable/disable logging in component
-const DEBUG_LOG = false;
+import { AppSettings } from '../app-settings';
+const DEBUG_LOG = AppSettings.DEBUG_LOG; // controls logging
 
 @Component({
   selector: 'app-user-registration-form',
