@@ -13,8 +13,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSnackBar } from '@angular/material/snack-bar'; //Used to display notifications back to the user
 
-//This import brings in the API calls we created in 6.2
+//This import brings in the API calls
 import { FetchApiDataService } from '../fetch-api-data.service';
+
+//Logging flag to enable/disable logging in component
+const DEBUG_LOG = false;
 
 @Component({
   selector: 'app-user-registration-form',
@@ -31,39 +34,53 @@ import { FetchApiDataService } from '../fetch-api-data.service';
   templateUrl: './user-registration-form.component.html',
   styleUrls: ['./user-registration-form.component.scss']
 })
+
+/**
+ * The user registration form component.
+ * @author P. Weaver
+ */
 export class UserRegistrationFormComponent implements OnInit {
 
   //Initialize input fields for userData
   @Input() userData = { Username: '', Password: '', Email: '', Birthdate: '' };
 
+  /**
+   * Injects instances of parameters into the class.
+   * @param fetchApiData API service instance used to call `userRegistration()`
+   * @param dialogRef `DialogRef` instance used to close dialog
+   * @param snackBar `SnackBar` instance used to display message to user
+   */
   constructor(
-    public fetchApiData: FetchApiDataService,
+    private fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
     public snackBar: MatSnackBar) { }
 
   ngOnInit(): void { }
 
-
-  //Used for cancel button functionality in template
+  /**
+   * Closes dialog modal (cancel button `click` in template).
+   */
   closeDialog(): void {
     this.dialogRef.close();
   }
 
-  // This is the function responsible for sending the form inputs to the backend
+  /**
+   * Sends registration form inputs to backend and alerts user of sucess/fail via SnackBar.
+   */
   registerUser(): void {
     this.fetchApiData.userRegistration(this.userData).subscribe((result) => {
-      console.log('registerUser():', result);
-      // Logic for a successful user registration goes here! (To be implemented)
-      this.dialogRef.close(); // This will close the modal on success!
+      DEBUG_LOG && console.log('registerUser():', result);
+      //Logic for a successful user registration 
+      this.dialogRef.close();
       this.snackBar.open(`✅ Registered ${result.Username} successfully!`, 'OK', {
         duration: 2500,
-        //panelClass: ['snackbar-success']
+
       });
     }, (result) => {
-      //Logic for failed registration here
+      //Logic for failed registration
       this.snackBar.open(`❌ Registration failed: ${result}`, 'OK', {
         duration: 8000,
-        //panelClass: ['snackbar-error']
+
       });
     });
   }

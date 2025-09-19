@@ -1,13 +1,9 @@
 <!-- src/app/user-login-form/user-login-form.component.html -->
 
 <mat-card>
-  <!--
-  <mat-card-header>
-    <mat-card-title style="margin-bottom: 10px;">Log In!</mat-card-title>
-  </mat-card-header>
-  -->
-  <mat-card-content>
 
+  <!--Form Fields-->
+  <mat-card-content>
     <form class="wider-form">
       <mat-form-field appearance="fill">
         <mat-label>Username</mat-label>
@@ -19,18 +15,16 @@
         <input matInput [(ngModel)]="userData.Password" type="password" name="Password" required>
       </mat-form-field>
     </form>
-
   </mat-card-content>
 
+  <!--Form Buttons-->
   <mat-card-actions>
-
     <button class="custom-button" (click)="loginUser()" style="margin-right:10px;">
       Log In
     </button>
-
     <button class="custom-button" (click)="closeDialog()">
       Cancel
     </button>
-
   </mat-card-actions>
+
 </mat-card>

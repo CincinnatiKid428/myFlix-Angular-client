@@ -1,6 +1,6 @@
+//File: src/app/welcome-page/welcome-page.component.ts
+
 import { Component, OnInit } from '@angular/core';
-import { NgIf } from "@angular/common";
-import { RouterModule } from '@angular/router';
 
 //Angular Material imports
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -13,73 +13,58 @@ import { UserLoginFormComponent } from '../user-login-form/user-login-form.compo
 @Component({
   selector: 'app-welcome-page',
   imports: [
-    NgIf,
     MatDialogModule,
     MatButtonModule,
-    RouterModule, //for test routing to '/profile' path : ProfilePageComponent
   ],
   templateUrl: './welcome-page.component.html',
   styleUrl: './welcome-page.component.scss'
 })
+/**
+ * First component presented to user containing Signup/Login options.
+ * @author P. Weaver
+ */
 export class WelcomePageComponent implements OnInit {
 
   localStorageUser: any | null = null; //user can be any(obj) or null, init to null
   localStorageToken: string | null = null; //token can be string or null, init to null
 
-  //Flag to allow debug buttons for viewing/clearing localStorage on app-root component
-  ENABLE_DEBUG_LOCALSTORAGE = false;
-
   constructor(public dialog: MatDialog) { }
 
-
-
+  /**
+   * Determines if the current execution context is the browser.
+   * @returns `True` if `typeof window` and `typeof localStorage` are not `undefined`, `False` otherwise
+   */
   private isBrowser(): boolean {
     return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
   }
 
+  /**
+   * Tries to get `user` and `token` from `localStorage`.
+   */
   ngOnInit(): void {
     if (this.isBrowser()) {
-      //Try to get user and token from localStorage
       let userString: string | null = localStorage.getItem('user');
       userString ? this.localStorageUser = JSON.parse(userString) : null;
       this.localStorageToken = localStorage.getItem('token');
     }
   }
 
-  //Function opens the dialog when signup button is clicked  
+  /**
+   * Opens the `UserRegistrationFormComponent` dialog when 'Signup' button is clicked.
+   */
   openUserRegistrationDialog(): void {
-    console.log('Opening registration dialog...');
     this.dialog.open(UserRegistrationFormComponent, {
-      // Assigning the dialog a width
       width: '50%',
     });
   }
 
-  //Function opens user login dialog when login button is clicked
+  /**
+   * Opens `UserLoginFormComponent` dialog when 'Login' button is clicked.
+   */
   openUserLoginDialog(): void {
-    console.log('Opening login dialog...');
     this.dialog.open(UserLoginFormComponent, {
       width: '50%'
     });
-  }
-
-  /////////////////////////////////////////////////////////////////
-  // Debugging functions for information (will be removed later) //
-  /////////////////////////////////////////////////////////////////
-
-  //Clears local storage values
-  clearLocalStorage(): void {
-    console.log('Clearing local storage...');
-    localStorage.clear();
-    this.localStorageUser = null;
-    this.localStorageToken = null;
-  }
-
-  //Gets local storage values and refreshes variables to Angular can see updates and display values after login
-  refreshLocalStorageValues(): void {
-    let userString = localStorage.getItem('user');
-    this.localStorageUser = userString ? JSON.parse(userString) : null;
-    this.localStorageToken = localStorage.getItem('token');
   }
 
 }

@@ -6,18 +6,35 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
+/**
+ * Provides an authentication check service through an `Observable` that other components can subscribe to.
+ * @remarks Components can use this service for auth status info or to update status after UI-based login/logout.
+ * @author ChatGPT generated base, modified by P. Weaver
+ */
 export class AuthCheckService {
+
+  /**
+   * User authentication state
+   */
   private loggedIn = new BehaviorSubject<boolean>(false);
 
-  // Observable you can subscribe to in components to check if user is authenticated
-  isLoggedIn$ = this.loggedIn.asObservable();
+  /**
+   * Observable that components can subscribe to in order to check if user is authenticated
+   * @readonly
+   */
+  readonly isLoggedIn$ = this.loggedIn.asObservable();
 
   constructor() {
-    //NO browser access here — leave empty
+    //NO browser access here — do not call hasAuth() here or this will cause errors with server-side rendering (SSR)
   }
 
   /**
-   * Call this in AppComponent.ngOnInit() — after platform is stable
+   * Checks authentication status and updates Observable isLoggedIn.
+   * 
+   * @remarks 
+   * This method should be called in `AppComponent.ngOnInit()` after the platform is stable.
+   * It ensures that localStorage is only accessed in a browser environment, avoiding errors during server-side rendering (SSR).
    */
   init(): void {
     if (this.isBrowser()) {
@@ -27,23 +44,38 @@ export class AuthCheckService {
     }
   }
 
-  // Utility: checks localStorage
+
+  /**
+   * Checks whether authentication data is present in localStorage.
+   * 
+   * @returns `true` if `user` && `token` are within localStorage; `false` otherwise.
+   */
   private hasAuth(): boolean {
-    return !!localStorage.getItem('user') && !!localStorage.getItem('token');
+    return !!localStorage.getItem('user') && !!localStorage.getItem('token'); // Logic provided by ChatGPT
   }
 
-  //Function determines if we are in the browser yet
+  /**
+   * Determines if current execution context is a browser environment.
+   * 
+   * @returns `true` if `window` and `localStorage` are defined; otherwise, `false`.
+   */
   private isBrowser(): boolean {
-    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
+    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';  // Logic provided by ChatGPT
   }
 
-  //Function updates loggedIn = true
+  /**
+   * Updates 'Observable' loggedIn to 'true'.
+   * @remarks Subscribers to `loggedIn$` will be notified when value updates to `true` after user logs in.
+   */
   login(): void {
     this.loggedIn.next(true);
     console.log(`**AuthCheckService: ✅ Logged in!`);
   }
 
-  //Function clears localStorage and updates loggedIn = false
+  /**
+   * Updates 'Observable' loggedIn to 'false' and clear localStorage.
+   * @remarks Subscribers to `loggedIn$` will be notified when value updates to `false` after user is logged out.
+   */
   logout(): void {
     if (this.isBrowser()) {
       localStorage.clear();

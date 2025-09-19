@@ -20,6 +20,9 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 //Auth check service import
 import { AuthCheckService } from '../auth-check.service';
 
+//Logging flag to enable/disable logging in component
+const DEBUG_LOG = false;
+
 @Component({
   selector: 'app-user-login-form',
   standalone: true,
@@ -35,13 +38,26 @@ import { AuthCheckService } from '../auth-check.service';
   templateUrl: './user-login-form.component.html',
   styleUrl: './user-login-form.component.scss'
 })
+
+/**
+ * The user login form component.
+ * @author P. Weaver
+ */
 export class UserLoginFormComponent implements OnInit {
 
   //Initialize input fields for userData
   @Input() userData = { Username: '', Password: '' };
 
+  /**
+   * Injects instances of parameters into the class.
+   * @param fetchApiData API service instance used to call `userLogin()`
+   * @param dialogRef `DialogRef` instance used to close dialog
+   * @param snackBar `SnackBar` instance used to display message to user
+   * @param router `Router` instance for navigation
+   * @param authCheckService Auth service to be notified if login is successful
+   */
   constructor(
-    public fetchApiData: FetchApiDataService,
+    private fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
     public snackBar: MatSnackBar,
     public router: Router,
@@ -54,17 +70,25 @@ export class UserLoginFormComponent implements OnInit {
 
   }
 
-  //Used for cancel button functionality in template
+  /**
+   * Closes dialog modal (cancel button `click` in template).
+   */
   closeDialog(): void {
     this.dialogRef.close();
   }
 
   //Function is responsible for sending the form inputs to the backend
+  /**
+   * Sends form inputs to backend API and routes user on success, alerts user on fail.
+   * @remarks 
+   * On a successful login, the user will be routed to the MovieCard component and given
+   * options for 'Movies', 'Profile' and 'Logout' in the nav bar.
+   */
   loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe((result) => {
 
-      // Logic for a successful user login here
-      console.log('loginUser(): ✅', result);
+      // Logic for a successful user login
+      DEBUG_LOG && console.log('loginUser(): ✅', result);
 
       //Store user, token & favorite movies in localStorage
       localStorage.setItem('user', JSON.stringify(result.user));
@@ -76,19 +100,18 @@ export class UserLoginFormComponent implements OnInit {
       this.dialogRef.close(); // This will close the modal on success!
       this.snackBar.open(`✅ ${result.user.Username} Login successful!`, 'OK', {
         duration: 2000,
-        //panelClass: ['snackbar-success'] //Try styling later if the component allows
       });
 
       //Navigate to the movies view since user has logged in successfully
       this.router.navigate(['/movies']);
 
     }, (result) => {
-      //Logic for failed login here
-      console.log('loginUser(): ❌', result);
+      //Logic for failed login
+      DEBUG_LOG && console.log('loginUser(): ❌', result);
       this.snackBar.open(`❌ Login failed: Please try again`, 'OK', {
         duration: 8000,
-        //panelClass: ['snackbar-error'] //Try styling later if the component allows
       });
     });
+
   }
 }

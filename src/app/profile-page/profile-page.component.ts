@@ -16,11 +16,14 @@ import { MatGridListModule } from '@angular/material/grid-list';
 //API service import
 import { FetchApiDataService } from '../fetch-api-data.service';
 
+//Auth check service import
+import { AuthCheckService } from '../auth-check.service';
+
 //Custom confirmation dialog component
 import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
 
-//Set to true for logging of profile page actions
-const PROFILE_DEBUG_LOG = true;
+//Logging flag to enable/disable logging in component
+const DEBUG_LOG = false;
 
 @Component({
   selector: 'app-profile-page',
@@ -37,33 +40,50 @@ const PROFILE_DEBUG_LOG = true;
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.scss'
 })
+
+/**
+ * Profile page component with account details and update/delete account options.
+ * @author P. Weaver
+ */
 export class ProfilePageComponent implements OnInit {
 
   //Initialize input fields for userData
   @Input() userData = { Password: '', Email: '', Birthdate: '' };
 
   user: any = null;
-  favMoviesSet: Set<string> = new Set();
 
+  /**
+   * Injects instances of parameters into the class.
+   * @param fetchApiData API service instance used to call `userUpdateAcctInfo()` or `userDeregistration()`
+   * @param dialog `MatDialog` instance used for to dispaly confirmation dialog
+   * @param snackBar `SnackBar` instance used to display message to user
+   * @param router `Router` instance for navigation
+   * @param authCheckService Auth service to be notified if account deleted (logout)
+   */
   constructor(
     private fetchApiData: FetchApiDataService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private router: Router,
+    private authCheckService: AuthCheckService
 
   ) { }
 
+  /**
+   * Retrieves and parses 'user' from `localStorage` if present.
+   */
   ngOnInit(): void {
     let userString: string = localStorage.getItem('user') || '';
     this.user = JSON.parse(userString) || null;
-    this.favMoviesSet = new Set(localStorage.getItem('favoriteMovies')) || new Set();
   }
 
   /**
- * Function will convert standard date format into simple MM/DD/YYYY string
- * @param {string} bday - Standard date format
- * @returns {string} Date in MM/DD/YYYY format
- */
+   * Converts standard date format into simple MM/DD/YYYY string.
+   * @author ChatGPT
+   * @param {string} bday - Standard date format
+   * @returns {string} Date in MM/DD/YYYY format
+   * @remarks ChatGPT used to generate this conversion function.
+   */
   formatUserBday(bday: string): string {
     let bdaySlice = bday.slice(0, 10);
     let dateParts = bdaySlice.split("-");
@@ -74,13 +94,15 @@ export class ProfilePageComponent implements OnInit {
       return dateParts[1] + "/" + dateParts[2] + "/" + dateParts[0];
   }
 
-  //Funciton handles API call to update account information
+  /**
+   * Calls API and updates user account information with form data.
+   */
   updateAccountInfo(): void {
-    PROFILE_DEBUG_LOG && console.log('* *Handle update info API call here...');
+    DEBUG_LOG && console.log('* *Handle update info API call here...');
     this.fetchApiData.userUpdateAcctInfo(this.userData, this.user.Username).subscribe((result) => {
 
-      //Logic for a successful update here
-      PROFILE_DEBUG_LOG && console.log('updateAccountInfo(): ✅', result);
+      //Logic for a successful update
+      DEBUG_LOG && console.log('updateAccountInfo(): ✅', result);
 
       //Update user in localStorage & this.user to cause re-render in template
       let userString = JSON.stringify(result);
@@ -93,8 +115,8 @@ export class ProfilePageComponent implements OnInit {
 
     }, (result) => {
 
-      //Logic for a failed update here
-      PROFILE_DEBUG_LOG && console.log('updateAccountInfo(): ❌', result);
+      //Logic for a failed update
+      DEBUG_LOG && console.log('updateAccountInfo(): ❌', result);
       this.snackBar.open(`❌ Account update failed: Please try again`, 'OK', {
         duration: 8000,
       });
@@ -102,7 +124,9 @@ export class ProfilePageComponent implements OnInit {
     });
   }
 
-  //Function handles API call to delete user account
+  /**
+   * Confirms deleteion with user and calls API to delete account.
+   */
   deleteAccount(): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '350px',
@@ -115,21 +139,21 @@ export class ProfilePageComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       //If user confirms, dialog result is true
       if (result === true) {
-        PROFILE_DEBUG_LOG && console.log(`* * ${this.user.Username} confirmed deletion`);
+        DEBUG_LOG && console.log(`* * ${this.user.Username} confirmed deletion`);
 
         this.fetchApiData.userDeregistration().subscribe(() => {
-          PROFILE_DEBUG_LOG && console.log(`* * deleteAccount(): ✅ Account ${this.user.Username} deleted successfully`);
+          console.log(`* * deleteAccount(): ✅ Account ${this.user.Username} deleted successfully`);
 
           this.snackBar.open(`✅ Account ${this.user.Username} deleted successfully`, 'OK', {
             duration: 3000,
           });
 
-          // Clear localStorage and route to welcome page
-          localStorage.clear();
+          //Notify auth service to logout user, then route to Welcome Page
+          this.authCheckService.logout();
           this.router.navigate(['/welcome']);
 
         }, (error) => {
-          PROFILE_DEBUG_LOG && console.log(`* * deleteAccount(): ❌ ${this.user.Username} Deletion failed`, error);
+          console.error(`* * deleteAccount(): ❌ ${this.user.Username} Deletion failed`, error);
 
           this.snackBar.open(`❌ Failed to delete account ${this.user.Username}: ${error.message || 'Please try again'}`, 'OK', {
             duration: 8000,
@@ -137,7 +161,7 @@ export class ProfilePageComponent implements OnInit {
         });
 
       } else { //User cancels the confirm dialog and no delete occurs
-        PROFILE_DEBUG_LOG && console.log(`* * 🚫 ${this.user.Username} cancelled deletion`);
+        DEBUG_LOG && console.log(`* * 🚫 ${this.user.Username} cancelled deletion`);
       }
     });
   }

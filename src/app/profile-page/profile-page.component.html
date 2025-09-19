@@ -1,7 +1,10 @@
 <!-- src/app/profile-page/profile-page.component.html -->
+
 <mat-card class="mat-card">
 
   <mat-card-content style="width:90%;">
+
+    <!--Account Info Display-->
     <h3>Account Information:</h3>
     <mat-grid-list cols="12" rowHeight="40px">
 
@@ -33,6 +36,7 @@
     <h3>Update/Delete Account:</h3>
     <p>(All fields must be completed)</p>
 
+    <!--Update Account Info Form-->
     <form class="update-delete-form">
 
       <mat-form-field appearance="fill">
@@ -54,6 +58,7 @@
 
   </mat-card-content>
 
+  <!--Update/Delete Buttons-->
   <mat-card-actions style="margin-bottom:20px;">
     <button class="custom-button" (click)="updateAccountInfo()" style="margin-right:10px;">
       Update Account

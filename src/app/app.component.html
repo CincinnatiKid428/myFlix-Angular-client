@@ -4,7 +4,6 @@
 
   <!-- Sidenav -->
   <mat-sidenav #drawer mode="over" [opened]="false" (backdropClick)="drawer.close()" class="sidenav">
-    <!-- These can be moved into a separate NavbarComponent if needed -->
     <div class="sidenav-buttons-format">
       <button class="custom-nav-button" routerLink="/movies" (click)="drawer.close()">Movies</button>
       <button class="custom-nav-button" routerLink="/profile" (click)="drawer.close()">Profile</button>
@@ -31,13 +30,6 @@
           <button class="custom-button" routerLink="/profile" style="margin-right:10px;">Profile</button>
           <button class="custom-button" (click)="logout()">Logout</button>
         </ng-container>
-
-        <!-- Button below has no purpose, user cannot leave /welcome without auth so no need to route to current page
-        <ng-template #mobileLoggedOut>
-          <button class="custom-button" routerLink="/welcome">Login/Signup</button>
-        </ng-template>
-        -->
-
       </ng-container>
 
     </mat-toolbar>
